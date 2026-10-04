@@ -5,20 +5,18 @@ on:
     types: [new-image]
 
 jobs:
-  build:
+  update-values:
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Update Image Tag in Helm Values
-      id: imgupd
-      uses: mikefarah/yq@master
-      with:
-        # Cập nhật trực tiếp vào trường image.tag trong file values.yaml của Helm Chart
-        cmd: yq eval '.image.tag = "${{ github.event.client_payload.image }}"' -i spring-boot-chart/values.yaml
-      
-    - uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: "feat(helm): update image tag via dispatch to ${{ github.event.client_payload.image }}"
+      - name: Update Image Tag in Helm Values
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq eval '.image.tag = "${{ github.event.client_payload.image }}"' -i spring-boot-chart/values.yaml
+        
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "feat(helm): update image tag via dispatch to ${{ github.event.client_payload.image }}"

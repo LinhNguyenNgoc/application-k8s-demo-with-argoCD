@@ -5,19 +5,16 @@ metadata:
   namespace: argocd
 spec:
   project: default
-
   source:
-    repoURL: https://github.com/LinhNguyenNgoc/application-demo-with-argoCD.git
+    repoURL: https://github.com/LinhNguyenNgoc/application-k8s-demo-with-argoCD.git # <-- Repo Config
     targetRevision: main
-    path: spring-boot-chart   # Trỏ vào thư mục chứa Helm Chart trong repo application
+    path: spring-boot-chart # Thư mục Helm chart hiện nằm ở Repo Config
   destination: 
     server: https://kubernetes.default.svc
     namespace: spring-app
-
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
-
     automated:
       selfHeal: true
       prune: true

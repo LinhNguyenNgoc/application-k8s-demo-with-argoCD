@@ -15,6 +15,7 @@ jobs:
       - name: Update Image Tag in Helm Values
         uses: mikefarah/yq@master
         with:
+          # Cắt chuỗi lấy phần sau dấu hai chấm (ví dụ: "12") gán vào tag
           cmd: yq eval '.image.tag = sub("${{ github.event.client_payload.image }}", ".*:", "")' -i spring-boot-chart/values.yaml
         
       - uses: stefanzweifel/git-auto-commit-action@v4

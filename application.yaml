@@ -7,9 +7,9 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/LinhNguyenNgoc/application-k8s-demo-with-argoCD.git
+    repoURL: https://github.com/LinhNguyenNgoc/application-demo-with-argoCD.git
     targetRevision: main
-    path: spring-app-demo-product
+    path: spring-boot-chart   # Trỏ vào thư mục chứa Helm Chart trong repo application
   destination: 
     server: https://kubernetes.default.svc
     namespace: spring-app
